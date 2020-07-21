@@ -41,11 +41,13 @@ def read_urls(filename):
     url_list = create_urls(puzzle_urls)
     url_list = list(set(url_list))
     sorted_urls = sorted(url_list, key=return_last_word)
+    return sorted_urls
+
 
 def extract_host_name(url):
     """Returns the host name from a given url"""
     host = re.findall(r'GET (\S+) HTTP', url)
-    return sorted_urls
+    return host
 
 
 def create_urls(urls):
@@ -81,6 +83,7 @@ def download_images(img_urls, dest_dir):
         urlretrieve(url, dest_dir + '/' + image_name)
         index_html += "<img src={}></img>".format(image_name)
     index_html += "</body></html>"
+
     with open(dest_dir + "/index.html", "w") as w_index:
         w_index.write(index_html)
 
